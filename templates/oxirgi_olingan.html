@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eng oxirgi recordlar</title>
+</head>
+<body>
+    <h1>Eng oxirgi 3 ta record</h1>
+    <a href="/">Bosh sahifa</a>
+    <hr>
+
+    {% for record in recordlar %}
+        <p>{{ record.talaba.ism }} - {{ record.kitob.nom }} </p>
+        <p>Olingan: {{ record.olingan_sana }}</p>
+    {% empty %}
+        <p>Record topilmadi.</p>
+    {% endfor %}
+</body>
+</html>

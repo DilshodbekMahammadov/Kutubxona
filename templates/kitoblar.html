@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | Kitoblar</title>
+</head>
+<body>
+    <h1>Kitoblar ro'yxati</h1>
+    <a href="/">Bosh sahifa</a>
+    <hr>
+
+    {% for kitob in kitoblar %}
+        <p>{{ forloop.counter}}. <a href="/kitoblar/{{ kitob.id }}/">{{ kitob.nom }}</a></p>
+    {% endfor %}
+</body>
+</html>

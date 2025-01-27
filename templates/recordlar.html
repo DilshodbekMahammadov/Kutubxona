@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | Recordlar</title>
+</head>
+<body>
+    <h1>Recordlar ro'yxati</h1>
+    <a href="/">Bosh sahifa</a>
+    <hr>
+
+    {% for record in recordlar %}
+        <p>{{ forloop.counter}}. <a href="/recordlar/{{ record.id }}/">{{ record.olingan_sana }}</a></p>
+    {% endfor %}
+</body>
+</html>

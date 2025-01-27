@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10 ta Kitobi Bo'lmagan Mualliflar</title>
+</head>
+<body>
+    <h1>Kitob soni 10 tadan kichik bo'lgan mualliflarning kitoblari</h1>
+    <a href="/">Bosh sahifa</a>
+    <hr>
+
+    {% for kitob in kitoblar %}
+        <p>Nomi: {{ kitob.nom }}</p>
+        <p>Muallif: {{ kitob.muallif.ism }}</p>
+    {% empty %}
+        <p>Kitob topilmadi.</p>
+    {% endfor %}
+</body>
+</html>

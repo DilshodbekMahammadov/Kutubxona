@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eng ko'p kitobi bo'lgan mualliflar</title>
+</head>
+<body>
+    <h1>Eng ko'p kitobi bo'lgan 3 ta muallif</h1>
+    <a href="/">Bosh sahifa</a>
+    <hr>
+
+    {% for muallif in mualliflar %}
+        <p>Ismi: {{ muallif.ism }}</p>
+        <p>{{ muallif.kitob_sini }} ta kitob</p>
+    {% empty %}
+        <p>Mualliflar topilmadi.</p>
+    {% endfor %}
+</body>
+</html>

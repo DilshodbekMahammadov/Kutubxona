@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tirik Mualliflar</title>
+</head>
+<body>
+    <h1>Tirik Mualliflar</h1>
+    <a href="/">Bosh sahifa</a>
+    <hr>
+
+        {% for muallif in mualliflar %}
+            <p>Ismi: {{ muallif.ism }} </p>
+            <p>Davlati: {{ muallif.davlat }}</p>
+        {% empty %}
+            <p>Muallif topilmadi.</p>
+        {% endfor %}
+
+</body>
+</html>

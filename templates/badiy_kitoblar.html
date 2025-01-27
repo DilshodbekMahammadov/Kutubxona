@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Badiiy Kitoblar</title>
+</head>
+<body>
+    <h1>Badiiy kitoblar</h1>
+    <a href="/">Bosh sahifa</a>
+    <hr>
+
+    {% for kitob in kitoblar %}
+        <p>Nomi: {{ kitob.nom }}</p>
+        <p>Janr: {{ book.janr }}</p>
+    {% empty %}
+        <p>Badiiy kitob topilmadi.</p>
+    {% endfor %}
+</body>
+</html>

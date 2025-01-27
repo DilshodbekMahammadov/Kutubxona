@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tirik mualliflarning kitoblari</title>
+</head>
+<body>
+    <h1>Tirik mualliflarning kitoblari</h1>
+    <a href="/">Bosh sahifa</a>
+    <hr>
+    {% for kitob in kitoblar %}
+        <p>Nomi: {{ kitob.nom }} </p>
+        <p>Muallif: {{ kitob.muallif.ism }}</p>
+    {% empty %}
+        <p>Kitob topilmadi.</p>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Katta Sahifali Kitoblar</title>
+</head>
+<body>
+    <h1>Eng Katta Sahifali 3 Ta Kitob</h1>
+    <a href="/">Bosh sahifa</a>
+    <hr>
+
+    {% for kitob in kitoblar %}
+        <p>Nomi: {{ kitob.nom }} </p>
+        <p>Sahifasi: {{ kitob.sahifa }}</p>
+    {% empty %}
+        <p>Kitob topilmadi.</p>
+    {% endfor %}
+</body>
+</html>
