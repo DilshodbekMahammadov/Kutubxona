@@ -6,11 +6,40 @@
 </head>
 <body>
     <h1>Talabalar ro'yxati</h1>
+    <form>
+        <input type="text" name="search" {% if search %} value={{ search }} {% endif %}>
+        <button>Qidirish</button>
+    </form>
+    <form>
+        <label>Kurs:</label>
+        <select name="kurs">
+            <option value="all">Barchasi</option>
+            {% for kurs in kurslar %}
+            <option value="{{ kurs }}" {% if kurs_query == kurs %} selected {% endif %}>
+                {{ kurs }}-kurs
+            </option> {% endfor %}
+        </select>
+        <label>Guruh:</label>
+        <select name="guruh">
+            <option value="all">Barchasi</option>
+            {% for guruh in guruhlar %}
+            <option
+                {% if guruh_query == guruh %} selected {% endif %}>{{ guruh }}</option>
+            {% endfor %}
+        </select>
+        <button>Filter</button>
+        <button type="reset">Tozalash</button>
+    </form>
     <a href="/">Bosh sahifa</a>
     <hr>
 
     {% for talaba in talabalar %}
-        <p>{{ forloop.counter}}. <a href="/talabalar/{{ talaba.id }}/">{{ talaba.ism }}</a></p>
+        <p>{{ forloop.counter}}. 
+            <a href="/talabalar/{{ talaba.id }}/">{{ talaba.ism }}</a>
+            <a href="/talabalar/{{ talaba.id }}/o'chirish/tasdiqlash/">
+                <button>O'chirish</button>
+            </a>
+        </p>
     {% endfor %}
 </body>
 </html>

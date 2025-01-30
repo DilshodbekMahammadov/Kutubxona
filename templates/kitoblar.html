@@ -6,11 +6,20 @@
 </head>
 <body>
     <h1>Kitoblar ro'yxati</h1>
+    <form>
+        <input type="text" name="search" {% if search %} value={{ search }} {% endif %}>
+        <button>Qidirish</button>
+    </form>
     <a href="/">Bosh sahifa</a>
     <hr>
 
     {% for kitob in kitoblar %}
-        <p>{{ forloop.counter}}. <a href="/kitoblar/{{ kitob.id }}/">{{ kitob.nom }}</a></p>
+        <p>{{ forloop.counter}}. 
+            <a href="/kitoblar/{{ kitob.id }}/">{{ kitob.nom }}</a>
+            <a href="/kitoblar/{{ kitob.id }}/o'chirish/tasdiqlash/">
+                <button>O'chirish</button>
+            </a>
+        </p>
     {% endfor %}
 </body>
 </html>

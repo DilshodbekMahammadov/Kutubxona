@@ -34,5 +34,10 @@ urlpatterns = [
     path('muallif_kitobi/', muallif_kitobi_view),
     path('badiy_kitoblar/', badiy_kitoblar_view),
     path('kitob_soni/', kitob_soni_view),
-    path('record_details/', record_details_view)
+    path('record_details/', record_details_view),
+    path("talabalar/<int:pk>/o'chirish/", talaba_delete_view),
+    path("talabalar/<int:pk>/o'chirish/tasdiqlash/", talaba_delete_confirm_view),
+    path("kitoblar/<int:pk>/o'chirish/",kitob_delete_view),
+    path("kitoblar/<int:pk>/o'chirish/tasdiqlash/",kitob_delete_confirm_view),
+
 ]

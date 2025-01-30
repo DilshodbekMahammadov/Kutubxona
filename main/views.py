@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from django.utils import timezone
 
@@ -6,8 +6,26 @@ def home_view(request):
     return render(request, 'index.html')
 def talaba_view(request):
     talabalar = Talaba.objects.all()
+    search = request.GET.get('search')
+    if search is not None:
+        talabalar = talabalar.filter(ism__contains = search)
+    kurs = request.GET.get('kurs')
+    if kurs is not None:
+        if kurs != 'all':
+            talabalar = talabalar.filter(kurs=kurs)
+    guruh = request.GET.get('guruh')
+    if guruh is not None:
+        if guruh != 'all':
+            talabalar = talabalar.filter(guruh=guruh)
+    guruhlar = Talaba.objects.order_by('guruh').values_list('guruh', flat=True).distinct()
+    kurslar = [1, 2, 3, 4]
     context = {
         'talabalar': talabalar,
+        'search' : search,
+        'guruhlar' : guruhlar,
+        'kurs_query' : kurs,
+        'guruh_query' : guruh,
+        'kurslar' : kurslar,
     }
     return render(request, 'talabalar.html', context)
 def muallif_view(request):
@@ -30,8 +48,12 @@ def muallif_details_view(request, muallif_id):
     return render(request, 'muallif_details.html', context)
 def kitob_view(request):
     kitoblar = Kitob.objects.all()
+    search = request.GET.get('search')
+    if search is not None:
+        kitoblar = kitoblar.filter(nom__contains = search)
     context = {
-        'kitoblar' : kitoblar
+        'kitoblar' : kitoblar,
+        'search' : search,
     }
     return render(request, 'kitoblar.html', context)
 def kitob_details_view(request, kitob_id):
@@ -95,3 +117,24 @@ def record_details_view(request, record_id):
         'record' : record
     }
     return render(request, 'record_details.html', context)
+def talaba_delete_view(request, pk):
+    talaba = get_object_or_404(Talaba, id=pk)
+    talaba.delete()
+    return redirect('talabalar')
+def talaba_delete_confirm_view(request,pk):
+    talaba = get_object_or_404(Talaba, id=pk)
+    context = {
+        'talaba' : talaba
+    }
+    return render(request, 'talaba_delete_confirm.html', context)
+def kitob_delete_view(request, pk):
+    kitob = get_object_or_404(Kitob, id=pk)
+    kitob.delete()
+    return redirect('kitoblar')
+def kitob_delete_confirm_view(request,pk):
+    kitob = get_object_or_404(Kitob, id=pk)
+    context = {
+        'kitob' : kitob
+    }
+    return render(request, 'kitob_delete_confirm.html', context)
+
