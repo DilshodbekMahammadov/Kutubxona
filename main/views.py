@@ -5,6 +5,15 @@ from django.utils import timezone
 def home_view(request):
     return render(request, 'index.html')
 def talaba_view(request):
+    if request.method == "POST":
+        Talaba.objects.create(
+            ism=request.POST.get('ism'),
+            kurs=request.POST.get('kurs'),
+            guruh=request.POST.get('guruh'),
+            yosh=request.POST.get('yosh'),
+            kitob_soni=request.POST.get('kitob_soni')
+        )
+        return redirect('talabalar')
     talabalar = Talaba.objects.all()
     search = request.GET.get('search')
     if search is not None:
@@ -30,8 +39,12 @@ def talaba_view(request):
     return render(request, 'talabalar.html', context)
 def muallif_view(request):
     mualliflar = Muallif.objects.all()
+    search = request.GET.get('search')
+    if search is not None:
+        mualliflar = mualliflar.filter(ism__contains=search)
     context = {
         'mualliflar': mualliflar,
+        'search' : search,
     }
     return render(request, 'mualliflar.html', context)
 def talaba_details_view(request, talaba_id):
@@ -47,6 +60,15 @@ def muallif_details_view(request, muallif_id):
     }
     return render(request, 'muallif_details.html', context)
 def kitob_view(request):
+    if request.method == "POST":
+        Kitob.objects.create(
+            nom=request.POST.get('nom'),
+            annotatsiya=request.POST.get('annotatsiya'),
+            janr=request.POST.get('janr'),
+            sahifa=request.POST.get('sahifa'),
+            muallif=request.POST.get('muallif')
+        )
+        return redirect('kitoblar')
     kitoblar = Kitob.objects.all()
     search = request.GET.get('search')
     if search is not None:
@@ -63,9 +85,33 @@ def kitob_details_view(request, kitob_id):
     }
     return render(request, 'kitob_details.html', context)
 def recordlar_view(request):
+    kutubxonachilar = Kutubxonachi.objects.all()
+    talabalar = Talaba.objects.all()
+    kitoblar = Kitob.objects.all()
+    if request.POST.get('olingan_sana') == '':
+        olingan_sana = None
+    else:
+        olingan_sana = request.POST.get('olingan_sana')
+    if request.POST.get('qaytarilgan_sana') == '':
+        qaytarilgan_sana = None
+    else:
+        qaytarilgan_sana = request.POST.get('qaytarilgan_sana')
+    if request.method == 'POST':
+        Record.objects.create(
+            talaba_id=request.POST.get('talaba_id'),
+            kitob_id=request.POST.get('kitob_id'),
+            kutubxonachi_id=request.POST.get('kutubxonachi_id'),
+            olingan_sana=request.POST.get('olingan_sana'),
+            qaytarilgan_sana=request.POST.get('qaytarilgan_sana'),
+            qaytardi=request.POST.get('qaytardi')
+        )
+        return redirect('recordlar')
     recordlar = Record.objects.all()
     context = {
-        'recordlar' : recordlar
+        'recordlar' : recordlar,
+        'kutubxonachilar' : kutubxonachilar,
+        'talabalar' : talabalar,
+        'kitoblar' : kitoblar
     }
     return render(request, 'recordlar.html', context)
 def tirik_mualliflar_view(request):
@@ -138,3 +184,22 @@ def kitob_delete_confirm_view(request,pk):
     }
     return render(request, 'kitob_delete_confirm.html', context)
 
+def muallif_qoshish_view(request):
+    if request.method == "POST":
+        if request.POST.get('kitob_soni') == '':
+            kitob_soni = None
+        else:
+            kitob_soni = int(request.POST.get('kitob_soni'))
+        if request.POST.get('t_sana') == '':
+            t_sana = None
+        else:
+            t_sana = request.POST.get('t_sana')
+        Muallif.objects.create(
+            ism=request.POST.get('ism'),
+            davlat=request.POST.get('davlat'),
+            kitob_soni=kitob_soni,
+            t_sana=t_sana,
+            tirik=request.POST.get('tirik')
+        )
+        return redirect('mualliflar')
+    return render(request, 'muallif_qoshish.html')

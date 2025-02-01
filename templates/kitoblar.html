@@ -10,6 +10,20 @@
         <input type="text" name="search" {% if search %} value={{ search }} {% endif %}>
         <button>Qidirish</button>
     </form>
+    <form method="post">
+        {% csrf_token %}
+        <label>Nom: </label>
+        <input type="text" name="nom" required>
+        <label>Annotatsiya:</label>
+        <textarea name="annotatsiya"></textarea>
+        <label>Janr:</label>
+        <input type="text" name="janr" required>
+        <br><br>
+        <label>Sahifasi:</label>
+        <input type="number" name="sahifa">
+        <label>Muallif:</label>
+        <button>Saqlash</button>
+    </form>
     <a href="/">Bosh sahifa</a>
     <hr>
 

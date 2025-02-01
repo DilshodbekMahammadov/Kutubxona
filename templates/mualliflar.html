@@ -6,6 +6,14 @@
 </head>
 <body>
     <h1>Muallifar ro'yxati</h1>
+    <form>
+        <input type="text" name="search" {% if search %} value={{ search }} {% endif %}>
+        <button>Qidirish</button>
+    </form>
+    <a href="/muallif-qoshish">
+        <button>Yangi muallif</button>
+    </a>
+    <br>
     <a href="/">Bosh sahifa</a>
     <hr>
 

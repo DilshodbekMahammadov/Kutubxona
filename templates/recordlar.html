@@ -6,6 +6,34 @@
 </head>
 <body>
     <h1>Recordlar ro'yxati</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label>Talaba: </label>
+        <select name="talaba_id">
+            {% for talaba in talabalar %}
+            <optoin value="{{ talaba.id }}">{{ talaba.ism }}</optoin>
+            {% endfor %}
+        </select>
+        <label>Kitob: </label>
+        <select name="kitob_id">
+            {% for kitob in kitoblar %}
+            <option value="{{ kitob.id }}">{{ kitob.nom }}</option>
+            {% endfor %}
+        </select>
+        <label>Ktubxonachi: </label>
+        <select name="kutubxonachu_id">
+            {% for kutubxonachi in kutubxonachilar %}
+            <option value="{{ kutubxonachi.id }}">{{ kutubxonachi.ism }}</option>
+            {% endfor %}
+        </select>
+        <label>Olingan sana: </label>
+        <input type="date" name="olingan_sana">
+        <label>Qaytarilgan sana: </label>
+        <input type="date" name="qaytarilgan_sana">
+        <label>Qaytardi: </label>
+        <input type="checkbox" name="qaytardi">
+        <button>Saqlash</button>
+    </form>
     <a href="/">Bosh sahifa</a>
     <hr>
 

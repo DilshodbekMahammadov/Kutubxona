@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | Muallif qo'shish</title>
+</head>
+<body>
+    <h1>Yangi muallif</h1>
+    <a href="/mualliflar/">Mualliflar ro'yxati</a>
+    <form method="post">
+        {% csrf_token %}
+        <label>Ism: </label>
+        <input type="text" name="ism" required>
+        <br><br>
+        <label>Davlat: </label>
+        <input type="text" name="davlat">
+        <br><br>
+        <label>Kitob soni: </label>
+        <input type="number" name="kitob_soni">
+        <br><br>
+        <label>Tug'ilgan sana: </label>
+        <input type="date" name="t_sana">
+        <br><br>
+        <label>Tirik: </label>
+        <input type="checkbox" name="tirik">
+        <label>Jins: </label>
+        <select name="jins">
+            <option>Erkak</option>
+            <option>Ayol</option>
+        </select>
+        <button>Saqlash</button>
+    </form>
+</body>
+</html>

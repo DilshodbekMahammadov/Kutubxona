@@ -39,5 +39,5 @@ urlpatterns = [
     path("talabalar/<int:pk>/o'chirish/tasdiqlash/", talaba_delete_confirm_view),
     path("kitoblar/<int:pk>/o'chirish/",kitob_delete_view),
     path("kitoblar/<int:pk>/o'chirish/tasdiqlash/",kitob_delete_confirm_view),
-
+    path('muallif-qoshish/', muallif_qoshish_view, name='muallif-qoshish')
 ]
