@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.template.context_processors import request
+
 from .models import *
 from django.utils import timezone
 
@@ -163,6 +165,22 @@ def record_details_view(request, record_id):
         'record' : record
     }
     return render(request, 'record_details.html', context)
+def talaba_update_view(request, pk):
+    if request.method == 'POST':
+        talaba = Talaba.objects.filter(pk=pk)
+        talaba.update(
+            ism=request.POST.get('ism'),
+            kurs=request.POST.get('kurs'),
+            guruh=request.POST.get('guruh'),
+            yosh=request.POST.get('yosh'),
+            kitob_soni=request.POST.get('kitob_soni')
+        )
+        return redirect('talabalar')
+    talaba = get_object_or_404(Talaba, id=pk)
+    context={
+        'talaba' : talaba
+    }
+    return render(request, 'talaba_update.html', context)
 def talaba_delete_view(request, pk):
     talaba = get_object_or_404(Talaba, id=pk)
     talaba.delete()
@@ -203,3 +221,35 @@ def muallif_qoshish_view(request):
         )
         return redirect('mualliflar')
     return render(request, 'muallif_qoshish.html')
+
+def kitob_update_view(request, pk):
+    if request.method == 'POST':
+        kitob = Kitob.objects.filter(pk=pk)
+        kitob.update(
+            nom=request.POST.get('nom'),
+            annotatsiya=request.POST.get('annotatsiya'),
+            janr=request.POST.get('janr'),
+            sahifa=request.POST.get('sahifa'),
+            muallif=Muallif.objects.get(id=request.POST.get('muallif_id'))
+        )
+        return redirect('kitoblar')
+    kitob = get_object_or_404(Kitob, id=pk)
+    mualliflar = Muallif.objects.exclude(id=kitob.muallif.id).order_by('ism')
+    context={
+        'kitob' : kitob,
+        'mualliflar' : mualliflar
+    }
+    return render(request, 'kitob_update.html', context)
+
+def kutubxonachi_qoshish_view(request):
+    if request.method == 'POST':
+        Kutubxonachi.objects.create(
+            ism=request.POST.get('ism'),
+            ish_vaqti=request.POST.get('ish_vaqti')
+        )
+        return redirect('kutubxonachilar')
+    kutubxonachi = Kutubxonachi.objects.all()
+    context = {
+        'kutubxonachi' : kutubxonachi
+    }
+    return render(request, 'kutubxonachi_qoshish.html', context)

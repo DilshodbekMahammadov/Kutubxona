@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | Kitob | Tahrirlash</title>
+</head>
+<body>
+<h1>{{ kitob.nom }} ma'lumotini tahrirlash</h1>
+    <hr>
+    <form method="post">
+        {% csrf_token %}
+        <label>Nom: </label>
+        <input type="text" name="nom" value="{{ kitob.nom }}" required>
+        <br><br>
+        <label>Annotatsiya: </label>
+        <input type="text" name="annotatsiya" value="{{ kitob.annotatsiya }}">
+        <br><br>
+        <label>Janr: </label>
+        <input type="text" name="janr" value="{{ kitob.janr }}" required>
+        <br><br>
+        <label>Sahifa: </label>
+        <input type="number" name="sahifa" value="{{ kitob.sahifa }}" required>
+        <br><br>
+        <label>Muallif: </label>
+      <select name="muallif_id">
+        <option value="{{ kitob.muallif.id }}">{{ kitob.muallif.ism }}</option>
+        {% for muallif in mualliflar %}
+        <option value="{{ muallif.id}} ">{{ muallif.ism }}</option>
+        {% endfor %}
+      </select>
+        <button>Tasdiqlash</button>
+    </form>
+</body>
+</html>
