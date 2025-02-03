@@ -18,7 +18,11 @@
     <hr>
 
     {% for muallif in mualliflar %}
-        <p>{{ forloop.counter}}. <a href="/mualliflar/{{muallif.id}}/">{{muallif.ism }}</a></p>
+        <p>{{ forloop.counter}}. <a href="/mualliflar/{{muallif.id}}/">{{muallif.ism }}</a>
+        <a href="/mualliflar/{{ muallif.id }}/tahrirlash/">
+                <button>Tahrirlash</button>
+            </a>
+        </p>
     {% endfor %}
 </body>
 </html>

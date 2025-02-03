@@ -37,10 +37,14 @@ urlpatterns = [
     path('record_details/', record_details_view),
     path("talabalar/<int:pk>/o'chirish/", talaba_delete_view),
     path("talabalar/<int:pk>/tahrirlash/", talaba_update_view),
+    path("recordlar/<int:pk>/tahrirlash/", record_update_view),
+    path("mualliflar/<int:pk>/tahrirlash/", muallif_update_view),
     path("talabalar/<int:pk>/o'chirish/tasdiqlash/", talaba_delete_confirm_view),
     path("kitoblar/<int:pk>/o'chirish/",kitob_delete_view),
     path("kitoblar/<int:pk>/o'chirish/tasdiqlash/",kitob_delete_confirm_view),
     path('muallif-qoshish/', muallif_qoshish_view, name='muallif-qoshish'),
     path("kitoblar/<int:pk>/tahrirlash/", kitob_update_view),
-    path("kutubxonachi/", kutubxonachi_qoshish_view)
+    path("kutubxonachilar/", kutubxonachi_view, name='kutubxonachilar'),
+    path("kutubxonachi/", kutubxonachi_qoshish_view),
+    path("kutubxonachi/", kutubxonachi_update_view)
 ]

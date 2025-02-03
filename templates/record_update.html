@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | Recordlar | Tahrirlash</title>
+</head>
+<body>
+    <h1>{{ record.ism }} ma'lumotlarini tahrirlash</h1>
+    <hr>
+    <form method="post">
+        <label>Qaytarilgan sanasi: </label>
+        <input type="text" name="qaytarilgan_sana" value="{{ record.qaytarilgan_sana }}" required>
+        <br><br>
+        <label>Qaytardi: </label>
+        <input type="checkbox" name="qaytardi" value="{{ record.qaytardi }}">
+        <button>Tasdiqlash</button>
+    </form>
+</body>
+</html>
