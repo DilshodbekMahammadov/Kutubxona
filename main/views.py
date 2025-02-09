@@ -2,22 +2,19 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template.context_processors import request
 
 from .models import *
-from django.utils import timezone
-
+from django import forms
+from .form import *
 
 def home_view(request):
     return render(request, 'index.html')
 
 
 def talaba_view(request):
+    form = TalabaForm
     if request.method == "POST":
-        Talaba.objects.create(
-            ism=request.POST.get('ism'),
-            kurs=request.POST.get('kurs'),
-            guruh=request.POST.get('guruh'),
-            yosh=request.POST.get('yosh'),
-            kitob_soni=request.POST.get('kitob_soni')
-        )
+        talaba_form = TalabaForm(request.POST)
+        if talaba_form.is_valid():
+            talaba_form.save()
         return redirect('talabalar')
     talabalar = Talaba.objects.all()
     search = request.GET.get('search')
@@ -40,6 +37,7 @@ def talaba_view(request):
         'kurs_query': kurs,
         'guruh_query': guruh,
         'kurslar': kurslar,
+        'form' : form
     }
     return render(request, 'talabalar.html', context)
 
@@ -101,16 +99,16 @@ def kitob_details_view(request, kitob_id):
     return render(request, 'kitob_details.html', context)
 
 def record_update_view(request, pk):
+    form = RecordForm
     if request.method == 'POST':
-        record = Record.objects.filter(pk=pk)
-        record.update(
-            qaytarilgan_sana=request.POST.get('qaytarilgan_sana'),
-            qaytardi=request.POST.get('qatardi')
-        )
+        record_form = RecordForm(request.POST)
+        if record_form.is_valid():
+            record_form.save()
         return redirect('recordlar')
     record = get_object_or_404(Record, id=pk)
     context = {
-        'record' : record
+        'form' : form,
+        'record' : record,
     }
     return render(request, 'record_update.html', context)
 
@@ -258,6 +256,7 @@ def kitob_delete_confirm_view(request, pk):
 
 
 def muallif_qoshish_view(request):
+    form = MuallifForm
     if request.method == "POST":
         if request.POST.get('kitob_soni') == '':
             kitob_soni = None
@@ -267,31 +266,26 @@ def muallif_qoshish_view(request):
             t_sana = None
         else:
             t_sana = request.POST.get('t_sana')
-        Muallif.objects.create(
-            ism=request.POST.get('ism'),
-            davlat=request.POST.get('davlat'),
-            kitob_soni=kitob_soni,
-            t_sana=t_sana,
-            tirik=request.POST.get('tirik')
-        )
+        muallif_form = MuallifForm(request.POST)
+        if muallif_form.is_valid():
+            muallif_form.save()
         return redirect('mualliflar')
-    return render(request, 'muallif_qoshish.html')
+    context = {
+        'form' : form
+    }
+    return render(request, 'muallif_qoshish.html', context)
 
 
 def muallif_update_view(request, pk):
+    form = MuallifForm
     if request.method == 'POST':
-        muallif = Muallif.objects.filter(pk=pk)
-        muallif.update(
-            ism=request.POST.get('ism'),
-            davlat=request.POST.get('davlat'),
-            kitob_soni=request.POST.get('kitob_soni'),
-            t_sana=request.POST.get('t_sana'),
-            tirik=request.POST.get('tirik')
-        )
+        muallif_form = MuallifForm(request.POST)
+        if muallif_form.is_valid():
+            muallif_form.save()
         return redirect('mualliflar')
     muallif = get_object_or_404(Muallif, id=pk)
     context = {
-        'muallif': muallif,
+        'form': form,
     }
     return render(request, 'muallif_update.html', context)
 
@@ -336,14 +330,14 @@ def kutubxonachi_update_view(request, pk):
 
 
 def kutubxonachi_qoshish_view(request):
+    form = KutubxonachiForm
     if request.method == 'POST':
-        Kutubxonachi.objects.create(
-            ism=request.POST.get('ism'),
-            ish_vaqti=request.POST.get('ish_vaqti')
-        )
+        kutubxonachi_form = KutubxonachiForm(request.POST)
+        if kutubxonachi_form.is_valid():
+            kutubxonachi_form.save()
         return redirect('kutubxonachilar')
     kutubxonachi = Kutubxonachi.objects.all()
     context = {
-        'kutubxonachi': kutubxonachi
+        'form': form
     }
     return render(request, 'kutubxonachi_qoshish.html', context)

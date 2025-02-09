@@ -9,20 +9,7 @@
     <hr>
     <form method="post">
         {% csrf_token %}
-        <label>Ism: </label>
-        <input type="text" name="ism" value="{{ muallif.ism }}" required>
-        <br><br>
-        <label>Davlat: </label>
-        <input type="text" name="davlat" value="{{ muallif.davlat }}" required>
-        <br><br>
-        <label>Kitob soni: </label>
-        <input type="number" name="kitob_soni" value="{{ muallif.kitob_soni }}" required>
-        <br><br>
-        <label>Tug'ilgan sanasi: </label>
-        <input type="text" name="t_sana" value="{{ muallif.t_sana }}" required>
-        <br><br>
-        <label>Tirik: </label>
-        <input type="checkbox" name="tirik" value="{{ muallif.tirik }}">
+        {{ form }}
         <button>Tasdiqlash</button>
     </form>
 </body>

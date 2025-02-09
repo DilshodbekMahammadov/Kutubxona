@@ -8,11 +8,7 @@
     <h1>{{ record.ism }} ma'lumotlarini tahrirlash</h1>
     <hr>
     <form method="post">
-        <label>Qaytarilgan sanasi: </label>
-        <input type="text" name="qaytarilgan_sana" value="{{ record.qaytarilgan_sana }}" required>
-        <br><br>
-        <label>Qaytardi: </label>
-        <input type="checkbox" name="qaytardi" value="{{ record.qaytardi }}">
+        {{ form }}
         <button>Tasdiqlash</button>
     </form>
 </body>

@@ -8,13 +8,7 @@
 
 <form method="post">
     {% csrf_token %}
-    <label>Ism: </label>
-    <input type="text" name="ism" required>
-    <label>Ish vaqti: </label>
-    <select name="ish_vaqti">
-        <option value="8:00 - 13:00">8:00 - 13:00</option>
-        <option value="13:00 - 18:00">13:00 - 18:00</option>
-    </select>
+    {{ form }}
     <button>Saqlash</button>
 </form>
 <a href="/">Bosh sahifa</a>
